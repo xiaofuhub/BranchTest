@@ -30,7 +30,7 @@ int git_remove(void *repo, const char *file_name[], int file_num, bool bKeepLoca
 			break;
 		}
 
-		error = git_index_write(index);
+		error = git_index_write(index);  // write to the dask? state is deleted
 		if(error < 0)
 		{
 			break;
@@ -152,13 +152,13 @@ int commit(void *repo, const char *file_name[], const unsigned int fileNum, cons
 
 		}
 	  
-		error = git_index_write_tree(&git, (git_index*)pIndex);
+		error = git_index_write_tree(&git, (git_index*)pIndex);   // write to tree ?
 		if (error < 0) 
 		{
 			break;
 		}
 
-		error = git_tree_lookup((git_tree**)&tree, (git_repository *)repo, &git);
+		error = git_tree_lookup((git_tree**)&tree, (git_repository *)repo, &git);  // get the repository tree?
 		if (error < 0) 
 		{
 			break;
