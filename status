@@ -1,0 +1,26 @@
+1. Delete file 1.txt
+git_remove_bypath(index, "1.txt")
+git_index_write(index)
+
+2. git status
+On branch master
+   Changes to be committed:
+   deleted:   1.txt
+Changes not staged for commit:
+   modified:  2.txt
+
+3.only want to commit modified file 2.txt
+
+git_index_add_bypath(index, "2.txt");  // just commit 2.txt,don't selected 1.txt. 
+git_index_write(index);
+git_index_write_tree(&git_oid, index);
+git_tree_lookup(&git_tree, repo, &gitoid);
+git_commit_create(&commit_oid, repo, "HEAD",signature, signature, NULL, message, git_tree, 1, parents_commit);
+
+4. git status 
+on branch master
+nothing to commit, working tree clean
+
+Question:
+Why the deleted file is also committed? How can I only commit "2.txt" without commit "1.txt"?
+Just like tortoise git, delete the file by menu command, after that user can only commit the modified file("2.txt")
